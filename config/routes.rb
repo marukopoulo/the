@@ -3,7 +3,14 @@ Rails.application.routes.draw do
 
   resources :users
   resources :sessions, only: [:new,:create,:destory]
-  resources :microposts, only: [:create, :destroy]
+  resources :microposts, only: [:create, :destroy,:show] ,:path => 'post'
+  resources :microposts,:path => 'post' do
+    collection do
+      get 'tag'
+    end
+  end
+ 
+
   match '/signup', to:'users#new',via: 'get'
   match 'signin',to:'sessions#new',via:'get'
   match 'signout',to:'sessions#destroy',via:'delete'

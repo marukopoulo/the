@@ -1,0 +1,12 @@
+
+<h1><%= @micropost.title %></h1>
+<h2><%= @micropost.content %></h2>
+<h3>
+ <% @micropost.tags.each do |tag| %>
+ <%= link_to tag.name,{:action => :index,:tag=>tag.name} %>
+<% end %>
+
+</h3>
+<% tag_cloud(Micropost.tag_counts_on(:tags), %w(css1 css2 css3 css4)) do |tag, css_class| %>
+<%= link_to tag.name, { :action => :index, :tag => tag.name }, :class => css_class %>
+<% end %>
